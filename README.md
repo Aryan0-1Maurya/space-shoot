@@ -4,7 +4,7 @@ Prepare for an intergalactic adventure with Space Shoot, an exhilarating space s
 
 ## Play the Game
 
-[Play Now](https://aryan0-1maurya.github.io/space-shoot/) 🕹️
+[Play Now]( https://aryan0-1maurya.github.io/space-shoot/) 🕹️
 
 ## About the Game
 
