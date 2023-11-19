@@ -1,0 +1,1076 @@
+<!-- 
+
+      ************************************************************
+
+           ++++++++++++++    --------    +++++++++++++++++
+
+{   By ~Aryan Maurya Mr.perfect https://amsrportfolio.netlify.app  }
+
+           ++++++++++++++    --------    +++++++++++++++++
+
+      ************************************************************
+ -->
+
+<!DOCTYPE html>
+
+<html lang = 'en'>
+
+<head>
+    <title>Space  Shooter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta name="author" content="Aryan Maurya" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="favicon.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <meta
+      name="description"
+      content="This is online space shooter game build for your imporove thing skill in this domain by aryan maurya enjoy your game"
+    />
+    <meta
+      name="keywords"
+      content="space ,space shooter,space shooting,space shooter game,games of space,best game,space game,spaceing game,space shooting game,game ,spac,shoot,shooting,shooting game,shooting game,space game,spoace shooting m,game,online games,space game,gamwe,space,shooting"
+    />
+    <style>
+        body {
+            position: fixed;
+            background: #222;
+            color: #FFF;
+            font-family: Arial;
+            width:  100%;
+            height: 100%;
+            margin: 0px;
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+
+        #background {
+            width: 100%;
+            height: 100%;
+        }
+
+
+        @keyframes shoot {
+            0% {
+                transform: translate(0px, 0px);
+            }
+            100% {
+                transform: translate(0px, -100vh);
+            }
+        }
+
+
+        .button {
+            opacity: 0;
+            transition: .5s background, 3s opacity;
+            outline: none;
+            background: #FFF;
+            color: #333;
+            font-size: 30px;
+            width: 300px;
+            height: 60px;
+            margin-top: 100px;
+            border: none;
+            border-radius: 35px;}
+            .button:hover {
+                background: #C8C8C8;
+            }
+
+        .frame {
+            display: table-cell; 
+            text-align: center; 
+            vertical-align: middle;
+        }
+
+
+        #menu {
+            transition: top 1.2s ease-in-out, opacity .4s;
+            background: #222;
+            display: table;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0px;
+            left: 0px;
+            z-index: 100;}
+            #menu-text {
+                opacity: 0;
+                transition: 2s opacity;
+                font-size: 80px;}
+
+
+        #settings {
+            contain: content;
+            transition: left 1s, opacity 1s;
+            background: #222E;
+            display: table;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0px;
+            left: -100%;
+            z-index: 101;}
+            #settings-exit {
+                outline: none;
+                position: absolute;
+                width: 50px;
+                height: 50px;
+                left: 0px;
+                top:  0px;    }
+                #cross {
+                font-size: 50px;
+                cursor: pointer;
+            }
+
+
+            #music {
+                -webkit-appearance: none;
+                outline: none;
+                display: inline-block;
+                width: 400px;
+                height: 20px;
+                margin-bottom: 20px;
+                background: #666;
+                border-radius: 15px;}
+                #sound-settings {
+                    display: inline-block;
+                    background: #222D;
+                    width: 500px;
+                    height: 250px;
+                    border-radius: 15px;
+                    border: 1px solid #333;}
+                #sound {
+                    -webkit-appearance: none;
+                    outline: none;
+                    display: inline-block;
+                    width: 400px;
+                    height: 20px;
+                    background: #666;
+                    border-radius: 15px;}
+                input[type=range]::-webkit-slider-thumb {
+                    -webkit-appearance: none;
+                    background-color: #222;
+                    border: 3px solid #EEE;
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 10px;
+                    cursor: pointer;
+                }
+                
+
+
+            #game-settings {
+                contain: content;
+                display: inline-block;
+                background: #222D;
+                width: 500px;
+                height: 250px;
+                margin-top: 15px;
+                border-radius: 15px;
+                border: 1px solid #333;}
+                #background-settings {
+                    display: inline-block; 
+                    background: #3338;
+                    width: 300px; 
+                    height: 70px; 
+                    margin-top: 10px; 
+                    border-radius: 15px;
+                }
+                #number-of-particles {
+                    -webkit-appearance: none;
+                    outline: none;
+                    display: inline-block;
+                    width: 200px;
+                    height: 20px;
+                    margin-top: 10px;
+                    background: #666;
+                    border-radius: 15px;
+                }
+
+
+        #difficulty-change {
+            contain: content;
+            transition: left 1s, opacity 1s;
+            position: absolute;
+            display: table;
+            background: #222E;
+            width:  100%;
+            height: 100%;
+            top: 0px;
+            left: 0px;
+            z-index: 98;}
+        .difficulty {
+            transition: .5s background;
+            position: relative;
+            display: inline-block;
+            background: #222;
+            font-size : 30px;
+            width:  200px;
+            height: 50px;
+            margin-top: 5px;
+            padding-top: 15px;
+            border-radius: 15px;
+            border: 1px solid #333;}
+            .difficulty span {
+                font-size: 30px;
+            }
+
+
+        #result {
+            contain: content;
+            transition: top 1.5s, opacity 1s;
+            opacity: 0;
+            display: none;
+            background: #2228;
+            position: absolute;
+            font-size: 60px;
+            width: 100%;
+            height: 100%;
+            top: -100%;
+            left: 0px;
+            z-index: 97;}
+            #result-frame {
+                display: table-cell;
+                text-align: center;
+                vertical-align: middle;
+        }
+
+
+        #player {
+            transition: 100ms left;
+            position: absolute;
+            background: url(https://dl.dropbox.com/s/9r4paca543196kg/player_ship.gif?raw=1);
+            background-size: cover;
+            width: 100px;
+            height: 100px;
+            z-index: 10;}
+            .bullets {
+                position: absolute;
+                width:  5px;
+                height: 10px;
+                border-radius: 5px;
+                animation: shoot 2s linear forwards;}
+
+        .enemies {
+            position: absolute;
+            background: #F00;
+            background-size: cover;
+            width:  50px;
+            height: 50px;}
+            .explosion {
+                transition: .5s opacity;
+                position: absolute;
+                width:  100px;
+                height: 100px;
+            }
+
+        
+        #kill-count {
+            transition: 2s opacity;
+            opacity: 0;
+            position: fixed;
+            display: inline;
+            font-size: 20px;
+            height: 20px;
+            margin: 10px;
+        }
+        
+        #phone-error {
+            transition: .5 opacity;
+            position: fixed;
+            display: none;
+            opacity: 0;
+            font-size: 24px;
+            text-align: center;
+            background: #222;
+            width:   100%; 
+            height:  100%; 
+            z-index: 1000;
+        }
+
+    </style>
+
+    <script>
+    amsr();
+    //alert("This will not work on phone\n\nThere may be a problem with the sound, but it's not my fault. You can turn sounds off in settings.\n\nEnjoy the game :)")
+    function amsr(){
+        Swal.fire({
+  icon: "info",
+  title: "This will not work on phone\n\nThere may be a problem with the sound, but it's not my fault. You can turn sounds off in settings.\n\nEnjoy the game :)",
+  showClass: {
+    popup: `
+      animate__animated
+      animate__fadeInUp
+      animate__faster
+    `
+  },
+  hideClass: {
+    popup: `
+      animate__animated
+      animate__fadeOutDown
+      animate__faster
+    `
+  }
+});
+    }
+    
+    //Start menu appears
+    window.onload = function() {
+        setTimeout(function(){
+            document.getElementById(   'menu-text'   ).style.opacity = '1';
+            setTimeout(function(){
+            document.getElementById(  'menu-button'  ).style.opacity = '1';
+            setTimeout(function(){
+            document.getElementById('settings-button').style.opacity = '1';
+            }, 200)
+            }, 400)
+        },300);
+    };
+    
+    
+    //Check to start from the phone
+    var touchstart = function(){
+        document.getElementById('phone-error').style.display = 'block'
+        setTimeout(function(){
+            document.getElementById('phone-error').style.opacity = '1'
+        },10)
+    }
+    window.addEventListener('touchstart', touchstart)
+    
+    </script>
+</head>
+
+<body>
+    
+    <div id = 'phone-error'>It doesn't work on phones :(</div>
+
+    <div id = 'kill-count'>Enemies 0/0</div>
+
+    <!-- Start menu -->
+    <div align = 'center' id = 'menu'>
+        <div class = 'frame'>
+            <div id = 'menu-text'>Space Shooter</div><br>
+            <button class = 'button' id = 'menu-button' onclick = 'document.getElementById("menu").style.top = "-100%";document.getElementById("menu").style.opacity = "0"; setTimeout(function(){document.getElementById("menu").style.display = "none"},2000);'>Start</button><br>
+            <button class = 'button' id = 'settings-button' onclick = 'document.getElementById("settings").style.left = "0px";' style = 'margin-top: 50px'>Settings</button>
+        </div>
+    </div>
+
+
+    <!-- Settings menu -->
+    <div align = 'center' id = 'settings'>
+
+        <div id = 'settings-exit' onclick = 'document.getElementById("settings").style.left = "-100%"'><div id = 'cross'>✕</div></div>
+
+        <div class = 'frame'>
+
+            <div id = 'sound-settings'>
+
+                <p style = 'font-size: 40px;'>Sound setting</p>
+                
+                <span style = 'font-size: 20px'>Music</span><br>
+                <input id = 'music' type = 'range' min = '0' max = '100' value = '50' oninput = 'changeMusic()'><span id = 'music-output' style = 'display: inline-block; vertical-align: super; width: 30px;'>50%</span><br>
+
+
+                <span style = 'font-size: 20px'>Effects</span><br>
+                <input id = 'sound' type = 'range' min = '0' max = '100' value = '30' oninput = 'changeSound()'><span id = 'sound-output' style = 'display: inline-block; vertical-align: super; width: 30px;'>30%</span><br>
+
+            </div><br>
+
+            <div id = 'game-settings'>
+
+                <p style = 'font-size: 40px;'>Game settings</p>
+
+                <span style = 'font-size: 24px'>The color of the bullets</span>
+                <input type = 'color' id = 'bullet-color' style = 'outline: none; background: #0000; border: none;' value = '#FFFFFF'><br>
+
+
+                <div id = 'background-settings'>
+
+                    <div id = 'particles'>
+
+                        <span id = 'number-of-particles-output' style = 'font-size: 24px;'>Number of stars: 200</span>
+                        <input type = 'range' id = 'number-of-particles' min = '0' max = '1000' value = '200' step = '10' oninput = 'changeNumberOfParticles()'>
+
+                    </div>
+
+                </div>
+
+            </div>
+            
+        </div>
+
+    </div>
+
+
+    <!-- 
+
+      ************************************************************
+
+           ++++++++++++++    --------    +++++++++++++++++
+
+{   By ~Aryan Maurya Mr.perfect https://amsrportfolio.netlify.app  }
+
+           ++++++++++++++    --------    +++++++++++++++++
+
+      ************************************************************
+ -->
+    <div align = 'center' id = 'difficulty-change' onclick = 'selectionCheck()'>
+
+        <div class = 'frame'>
+        
+            <p style = 'display: inline-block; font-size: 50px'>Select the difficulty level</p><br>
+
+
+            <input id  = 'easy' type = 'radio' name = 'difficulty' style = 'display: none'>
+
+            <label for = 'easy'>
+                <div class = 'difficulty' id = 'easy-div'>
+                    <span>Easy</span>
+                </div>
+            </label><br>
+            
+            
+            <input id  = 'medium' type = 'radio' name = 'difficulty' style = 'display: none'>
+
+            <label for = 'medium'>
+                <div class = 'difficulty' id = 'medium-div'>
+                    <span>Medium</span>
+                </div>
+            </label><br>
+            
+            
+            <input id  = 'hard' type = 'radio' name = 'difficulty' style = 'display: none'>
+
+            <label for = 'hard' >
+                <div class = 'difficulty' id = 'hard-div'>
+                    <span>Hard</span>
+                </div>
+            </label><br>
+            
+            
+            <input id  = 'infinite' type = 'radio' name = 'difficulty' style = 'display: none'>
+
+            <label for = 'infinite'>
+                <div class = 'difficulty' id = 'infinite-div'>
+                    <span>Infinite</span>
+                </div>
+            </label><br>
+
+            <button class = 'button' style = 'opacity: 1; width: 250px; margin-top: 20px;' onclick = 'closeDifficultyMenu()'>Confirm</button>
+
+        </div>
+
+    </div>
+
+
+    <!-- Win/loss window -->
+    <div align = 'center' id = 'result'>
+        <div class = 'frame'>
+            <label><span id = 'result-text'>...</span></label><br>
+            <button class = 'button' style = 'opacity: 1' onclick = 'replay()'>Replay</button><br>
+            <button class = 'button' style = 'opacity: 1; margin-top: 50px' onclick = 'openDifficultyMenu()'>Change the difficulty</button><br>
+            <button class = 'button' onclick = 'document.getElementById("settings").style.left = "0px";' style = 'margin-top: 50px; opacity: 1'>Settings</button>
+        </div>
+    </div>
+
+    <!-- Canvas background -->
+    <canvas id = 'background'>oops...</canvas>
+
+    <!-- playing field -->
+    <div id = 'game'>
+
+        <div id = 'player'></div>
+
+    </div>
+    
+</body>
+
+<script>
+
+    //Initialization function
+    function init(){
+        w = window.innerWidth
+        h = window.innerHeight
+
+        player.style.top  = h   - 105 + 'px'
+        player.style.left = w/2 - 50  + 'px'
+    }
+    init()
+
+    mouseX = w/2-50
+
+    //Preloading music
+    var bgSoundPreload      = new Audio()
+    bgSoundPreload.src      = 'https://dl.dropbox.com/s/0atnyf8mnag2xhd/background.mp3?raw=1'
+    
+    var shootSoundPreload   = new Audio()
+    shootSoundPreload.src   = 'https://dl.dropbox.com/s/qgas92l8iavh3yg/shoot.wav?raw=1'
+    
+    var winSoundPreload     = new Audio()
+    winSoundPreload.src     = 'https://dl.dropbox.com/s/dh1zlhe5k67hfzo/win.wav?raw=1'
+    
+    var loseSoundPreload    = new Audio()
+    loseSoundPreload.src    = 'https://dl.dropbox.com/s/914rf0ihrmeurtb/lose.wav?raw=1'
+    
+    var explodeSoundPreload = new Audio()
+    explodeSoundPreload.src = 'https://dl.dropbox.com/s/d1ndkw3c5zhmohw/explosion.wav?raw=1'
+
+    var bgSound         = new Audio()
+    var shootSound   = new Audio()
+    var resultSound  = new Audio()
+    var explodeSound = new Audio()
+
+
+    //Preloading animation explosion
+    var explosionImage0 = new Image() 
+    explosionImage0.src = 'https://dl.dropbox.com/s/pyu2b7rkcra4yom/explosion0.png?raw=1'
+
+    var explosionImage1 = new Image() 
+    explosionImage1.src = 'https://dl.dropbox.com/s/bz4oxaimf1nl98f/explosion1.png?raw=1'
+
+    var explosionImage2 = new Image() 
+    explosionImage2.src = 'https://dl.dropbox.com/s/tfh85qwcvtb0skk/explosion2.png?raw=1'
+
+    var explosionImage3 = new Image() 
+    explosionImage3.src = 'https://dl.dropbox.com/s/gmbpmp8o9iqvykd/explosion3.png?raw=1'
+
+    var explosionImage4 = new Image() 
+    explosionImage4.src = 'https://dl.dropbox.com/s/jyb36w7mof607nh/explosion4.png?raw=1'
+
+    var explosionImage5 = new Image() 
+    explosionImage5.src = 'https://dl.dropbox.com/s/pgtnwcq9lv3tag9/explosion5.png?raw=1'
+
+    var explosionImage6 = new Image() 
+    explosionImage6.src = 'https://dl.dropbox.com/s/e8svxkqcmapzd3p/explosion6.png?raw=1'
+
+    var explosionImage7 = new Image() 
+    explosionImage7.src = 'https://dl.dropbox.com/s/m46b4emf55adg2j/explosion7.png?raw=1'
+
+    var explosionImage8 = new Image() 
+    explosionImage8.src = 'https://dl.dropbox.com/s/gkqxbyryrxz4df3/explosion8.png?raw=1'
+
+    var explosionImage9 = new Image() 
+    explosionImage9.src = 'https://dl.dropbox.com/s/8qteoieywswrsq3/explosion9.png?raw=1'
+
+
+    //Preloading icons enemies
+    var enemy0 = new Image()
+    enemy0.src = 'https://dl.dropbox.com/s/m9qoeftly0uyw8n/enemy_ship0.gif?raw=1'
+    var enemy1 = new Image()
+    enemy1.src = 'https://dl.dropbox.com/s/d2em6iqdp90jd1h/enemy_ship1.gif?raw=1'
+    var enemy2 = new Image()
+    enemy2.src = 'https://dl.dropbox.com/s/5z08vxihhihzijr/enemy_ship2.gif?raw=1'
+
+
+    player.style.top  = h   - 105 + 'px'
+    player.style.left = w/2 - 50  + 'px'
+
+
+    //Random numbers generator
+    function randInt(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+
+    //Change music volume
+    function changeMusic(){
+        var musicValue = document.getElementById('music').value
+        document.getElementById('music-output').innerHTML = musicValue+'%'
+        bgSound.volume = musicValue/100
+    }
+
+    //Change sound volume
+    function changeSound(){
+        var soundValue = document.getElementById('sound').value
+        document.getElementById('sound-output').innerHTML = soundValue+'%'
+        shootSound.volume   = soundValue/100
+        resultSound.volume  = soundValue/100
+        explodeSound.volume = soundValue/100
+    }
+
+    //Close the difficulty selection menu and start
+    function closeDifficultyMenu(){
+        if (document.getElementById(  'easy'  ).checked ||
+            document.getElementById( 'medium' ).checked ||
+            document.getElementById(  'hard'  ).checked ||
+            document.getElementById('infinite').checked) {
+            startGame()
+            document.getElementById("difficulty-change").style.opacity = "0"
+            document.getElementById("difficulty-change").style.left = "-100%"
+            setTimeout(function(){
+                document.getElementById("difficulty-change").style.display = "none"
+            },1500)
+        }
+        else {alert('Select the difficulty level!')}
+    }
+
+    //Opens the difficulty selection menu
+    function openDifficultyMenu(){
+        document.getElementById("difficulty-change").style.display = "table"; 
+        setTimeout(function(){
+            document.getElementById("difficulty-change").style.left = "0"; 
+            document.getElementById("difficulty-change").style.opacity = "1"
+        },10); 
+
+        document.getElementById("result").style.top = "-100%";
+        document.getElementById("result").style.opacity = "0";
+        setTimeout(function(){
+            document.getElementById("result").style.display = "none"
+        },1500)
+    }
+
+    //Check the selected difficulty
+    function selectionCheck(){
+        setTimeout(function(){
+            if (document.getElementById('easy').checked){
+                document.getElementById(  'easy-div'  ).style.background = '#333'
+                document.getElementById( 'medium-div' ).style.background = '#222'
+                document.getElementById(  'hard-div'  ).style.background = '#222'
+                document.getElementById('infinite-div').style.background = '#222'
+            }
+            if (document.getElementById('medium').checked){
+                document.getElementById(  'easy-div'  ).style.background = '#222'
+                document.getElementById( 'medium-div' ).style.background = '#333'
+                document.getElementById(  'hard-div'  ).style.background = '#222'
+                document.getElementById('infinite-div').style.background = '#222'
+            }
+            if (document.getElementById('hard').checked){
+                document.getElementById(  'easy-div'  ).style.background = '#222'
+                document.getElementById( 'medium-div' ).style.background = '#222'
+                document.getElementById(  'hard-div'  ).style.background = '#333'
+                document.getElementById('infinite-div').style.background = '#222'
+            }
+            if (document.getElementById('infinite').checked){
+                document.getElementById(  'easy-div'  ).style.background = '#222'
+                document.getElementById( 'medium-div' ).style.background = '#222'
+                document.getElementById(  'hard-div'  ).style.background = '#222'
+                document.getElementById('infinite-div').style.background = '#333'
+            }
+        },10)
+    }
+
+    //Starting a game
+    function startGame(){
+
+        init()
+
+        //Destruction of remaining enemies
+        enemies_ = document.getElementsByClassName('enemies')
+          for (i = 0; i < enemies_.length; i++){
+              enemies_[i].remove()
+          }
+
+
+          //Variables    
+        var shooting
+        var difficulty
+        var enemyCount    = 0
+        var killedEnemies = 0
+        var collisionInterval
+        var infiniteInterval
+        var shootTimeout
+        var maxEnemy   
+        var enemySpeedMin
+        var enemySpeedMax
+        var enemyTimeout
+        var enemyInterval
+        var animatedBackgroundInterval = NaN
+        var numberOfParticles
+
+
+        //Setting the selected difficulty
+        if (document.getElementById('easy').checked){
+            shootTimeout  = 250
+            maxEnemy      = 20
+            enemySpeedMin = 5
+            enemySpeedMax = 15
+            enemyTimeout  = 1000
+        }
+
+        if (document.getElementById('medium').checked){
+            shootTimeout  = 300
+            maxEnemy      = 50
+            enemySpeedMin = 5
+            enemySpeedMax = 10
+            enemyTimeout  = 800
+        }
+
+        if (document.getElementById('hard').checked){
+            shootTimeout  = 350
+            maxEnemy      = 100
+            enemySpeedMin = 3
+            enemySpeedMax = 8
+            enemyTimeout  = 600
+        }
+
+        clearInterval(infiniteInterval)
+        if (document.getElementById('infinite').checked){
+            shootTimeout  = 350
+            maxEnemy      = Infinity
+            enemySpeedMin = 7
+            enemySpeedMax = 10
+            enemyTimeout  = 1000
+            infiniteInterval = setInterval(function(){
+                clearInterval(enemyInterval)
+                enemyInterval = setInterval(spawnEnemy, Math.max(400, 1000 - killedEnemies*5))
+                enemySpeedMin = Math.max(3, 7 - killedEnemies/100)
+            }, 1100)
+        }
+
+        //Initialize counter enemies
+        document.getElementById('kill-count').innerHTML = '<strong>Enemies: 0/'+maxEnemy+'</strong>'
+        document.getElementById('kill-count').style.opacity = 1
+
+
+        //Turn on music
+        bgSound.src      = bgSoundPreload.src
+        bgSound.volume   = document.getElementById('music').value/100
+          bgSound.loop     = true
+          bgSound.autoplay = true
+
+
+          //Setting shooting
+        var mousedown = function(){
+            shoot()
+            if (!shooting){
+                 shooting = setInterval(shoot, shootTimeout)
+            }
+        }
+        window.addEventListener('mousedown', mousedown)
+
+        var mouseup = function(){{
+            clearInterval(shooting)
+            shooting =  NaN
+        }}
+        window.addEventListener('mouseup', mouseup)
+
+        var mousemove = function(event){
+            mouseX = event.clientX-50
+            player.style.left = Math.floor(mouseX/20)*20+10 + 'px'
+        }
+        window.addEventListener('mousemove', mousemove)
+
+
+        //Create bullets
+        function shoot(){
+
+            shootSound.src = shootSoundPreload.src
+              shootSound.volume = document.getElementById('sound').value/100
+              shootSound.autoplay = true
+
+            var bullet = document.createElement("div");
+            bullet.className  = 'bullets'
+
+            bullet.style.top  = h - 100   + 'px'
+
+            bullet.style.left = player.getBoundingClientRect().x + 48 + 'px'
+
+            bullet.style.background = document.getElementById('bullet-color').value
+
+            setTimeout(function(){
+                bullet.remove()
+            },2000)
+            game.appendChild(bullet)
+        }
+
+
+        //Creating an enemy
+        enemyInterval = setInterval(spawnEnemy, enemyTimeout)
+        function spawnEnemy(){
+
+            if (enemyCount < maxEnemy){
+                var enemy = document.createElement("div");
+
+                enemy.className  = 'enemies'
+
+                enemy.style.top  = '-50px'
+                enemy.style.left = Math.floor(randInt(100, w-100)/20)*20 + 'px'
+
+                
+                enemy.style.background = 'url('+[enemy0.src,enemy1.src,enemy2.src][randInt(0,3)]+')'
+                enemy.style.backgroundSize = 'cover';
+
+                enemy.style.transition = randInt(enemySpeedMin, enemySpeedMax)+'s top ease-in-out';
+
+                enemyCount++
+                game.appendChild(enemy)
+                setTimeout(function(){
+                    enemy.style.top = h + 'px'
+                },10)
+            }
+        }
+
+
+        //Explosion animations
+        function explosion(x, y){
+
+            explodeSound.src = explodeSoundPreload.src
+            explodeSound.volume = document.getElementById('sound').value/100
+            explodeSound.autoplay = true
+
+            var  explosion = document.createElement("img");
+
+            explosion.className  = 'explosion'
+
+            explosion.style.left = x-25 + 'px'
+            explosion.style.top  = y-25 + 'px'
+
+            explosion.src = explosionImage0.src
+            setTimeout(function(){
+                explosion.src = explosionImage1.src
+                setTimeout(function(){
+                    explosion.src = explosionImage2.src
+                    setTimeout(function(){
+                        explosion.src = explosionImage3.src
+                        setTimeout(function(){
+                            explosion.src = explosionImage4.src
+                            setTimeout(function(){
+                                explosion.src = explosionImage5.src
+                                setTimeout(function(){
+                                    explosion.src = explosionImage6.src
+                                    setTimeout(function(){
+                                        explosion.src = explosionImage7.src
+                                        setTimeout(function(){
+                                            explosion.src = explosionImage8.src
+                                            setTimeout(function(){
+                                                explosion.src = explosionImage9.src
+                                            },60)
+                                        },60)
+                                    },60)
+                                },60)
+                            },60)
+                        },60)
+                    },60)
+                },60)
+            },60)
+
+            game.appendChild(explosion)
+
+            setTimeout(function(){
+                    explosion.remove()
+            },600)
+        }
+
+
+        //Collision check
+        collisionInterval = setInterval(collisionCheck, 10)
+        function collisionCheck(){
+
+            if (killedEnemies == maxEnemy) result(1)
+
+            bullets = document.getElementsByClassName('bullets')
+            enemies = document.getElementsByClassName('enemies')
+
+            for     ( enemy_ = 0;  enemy_ < enemies.length;  enemy_ ++){
+                if (enemies[enemy_].getBoundingClientRect().top > h-50){
+                    clearInterval(collisionInterval)
+                    result(0)
+                }
+                for (bullet_ = 0; bullet_ < bullets.length; bullet_ ++){
+                    if (bullets[bullet_] && enemies[enemy_]){
+                        bullet = bullets[bullet_].getBoundingClientRect()
+                        enemy  =  enemies[enemy_].getBoundingClientRect()
+
+                        if (bullet.x < enemy.x + enemy.width  &&
+                            bullet.x + bullet.width > enemy.x &&
+                            bullet.y < enemy.y + enemy.height &&
+                            bullet.y + bullet.height > enemy.y) {
+
+                                bullets[bullet_].remove()
+                                 enemies[ enemy_].remove()
+
+                                  killedEnemies++
+
+                                  document.getElementById('kill-count').innerHTML = '<strong>Enemies: '+killedEnemies+'/'+maxEnemy+'</strong>'
+
+                                  explosion(enemy.x, enemy.y)
+                        }
+                    }
+                }
+            }
+        }
+
+
+        //Drop-down menu after win/loss
+        function result(type){
+            maxEnemy = 0
+
+            clearInterval(collisionInterval)
+
+            bgSound.pause()
+            if (document.getElementById('infinite').checked){
+                resultSound.src = winSoundPreload.src
+                document.getElementById('result-text').innerHTML = 'Your score: '+killedEnemies
+            }
+            else if (type == 1){
+                resultSound.src = winSoundPreload.src
+                document.getElementById('result-text').innerHTML = 'You win!'
+            }
+            else if (type == 0){
+                resultSound.src = loseSoundPreload.src
+                document.getElementById('result-text').innerHTML = 'You lose...'
+            }
+            
+            resultSound.volume   = document.getElementById('sound').value/100
+              resultSound.autoplay = true
+
+              document.getElementById('result').style.display = 'table'
+              setTimeout(function(){
+                  document.getElementById('result').style.opacity = '1'
+                  document.getElementById('result').style.top     = '0px'
+              },20)
+              
+              window.removeEventListener('mousedown', mousedown)
+              window.removeEventListener('mousemove', mousemove)
+
+              document.getElementById('kill-count').style.opacity = '0'
+
+              player.style.transition = '1s left'
+              player.style.left = w/2-50 + 'px'
+              setTimeout(function(){
+                  player.style.transition = '100ms left'
+              },1000)
+
+              enemies_ = document.getElementsByClassName('enemies')
+              for (i = 0; i < enemies_.length; i++){
+                  enemies_[i].style.display = 'none'
+              }
+        }
+    }
+
+
+    //Restarting the game
+    function replay(){
+        startGame()
+        document.getElementById("result").style.top = "-100%"
+        document.getElementById("result").style.opacity = "0"
+        setTimeout(function(){
+            document.getElementById("result").style.display = "none"
+        },1000)
+    }
+
+
+    //----------------------
+    //Setting the background
+    //----------------------
+
+
+    //Change in particle count
+    function changeNumberOfParticles(){
+        clearInterval(animatedBackgroundInterval)
+        numberOfParticles = document.getElementById('number-of-particles').value
+        document.getElementById('number-of-particles-output').innerHTML = (numberOfParticles > 0) ? 'Number of stars: '+numberOfParticles : 'Static background'
+        background()
+    }
+
+    //Background
+    canvas = document.getElementById('background')
+    ctx    = canvas.getContext('2d')
+
+    canvas.width  = w
+    canvas.height = h
+
+    function background(){
+        numberOfParticles = document.getElementById('number-of-particles').value
+
+        if (numberOfParticles == 0){
+            staticBackground()
+        }
+        else {
+            animatedBackground()
+        }
+
+        //Animated background
+        function animatedBackground(){
+            ctx.fillStyle = '#222'
+            ctx.fillRect(0, 0, w, h)
+
+            ctx.shadowBlur = 0
+
+            var stars = []
+
+            for (i = 0; i < numberOfParticles; i++){
+                x = Math.floor(randInt(0, w)/10)*10
+                y = Math.floor(randInt(0, h)/10)*10
+
+                stars.push([x, y])
+            }
+
+            function draw(){
+                for (i = 0; i < stars.length; i++){
+
+                    ctx.fillStyle = '#222'
+                    ctx.fillRect(stars[i][0], stars[i][1]-2, 2, 2)
+                    ctx.beginPath()
+
+                    ctx.fillStyle = '#EEE'
+                    ctx.fillRect(stars[i][0], stars[i][1], 2, 2)
+                    ctx.beginPath()
+                }
+            }
+            draw()
+
+            animatedBackgroundInterval = setInterval(function(){
+                for (i = 0; i < stars.length; i++){
+                    stars[i][1]++
+                    if (stars[i][1] > h){
+                        stars.splice(i, 1)
+                    }
+                }
+                if (stars.length < numberOfParticles){
+                    stars.push([Math.floor(randInt(0, w)/10)*10, 0])
+                }
+                draw()
+            },50)
+        }
+
+        //Static background
+        function staticBackground(){
+            clearInterval(animatedBackgroundInterval)
+
+            ctx.fillStyle = '#222'
+            ctx.fillRect(0, 0, w, h)
+
+            ctx.shadowColor = '#FFF'
+            ctx.shadowOffsetX = 0
+            ctx.shadowOffsetY = 0
+
+            ctx.fillStyle   = '#EEE'
+            ctx.strokeStyle = '#EEE';
+
+            for (i = 0; i < 500; i++){
+                x = Math.floor(randInt(0, w)/10)*10
+                y = Math.floor(randInt(0, h)/10)*10
+
+                ctx.fillRect(x, y, 2, 2);
+                ctx.shadowBlur = 20
+
+                ctx.fill()
+                ctx.stroke()
+                ctx.beginPath()
+            }
+        }
+    }
+    background()
+    
+</script>
+
+</html>
+<!-- 
+
+      ************************************************************
+
+           ++++++++++++++    --------    +++++++++++++++++
+
+{   By ~Aryan Maurya Mr.perfect https://amsrportfolio.netlify.app  }
+
+           ++++++++++++++    --------    +++++++++++++++++
+
+      ************************************************************
+ -->
